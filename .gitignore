@@ -63,3 +63,9 @@ target/
 
 # PyCharm
 .idea
+
+# Environment variables file
+*.env
+
+# Mac
+.DS_Store
