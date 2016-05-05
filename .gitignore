@@ -69,3 +69,6 @@ target/
 
 # Mac
 .DS_Store
+
+# Custom
+set_environment_variables.sh
