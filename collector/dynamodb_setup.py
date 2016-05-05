@@ -9,7 +9,6 @@ from flask.ext.dynamo import Dynamo
 import dynamodb_config
 
 app = Flask(__name__)
-print dynamodb_config.DYNAMO_TABLES
 app.config['DYNAMO_TABLES'] = dynamodb_config.DYNAMO_TABLES
 dynamo = Dynamo(app)
 
