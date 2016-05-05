@@ -5,7 +5,7 @@ and dump all received data into a database.
 Author: Angad Gill
 """
 
-from flask import Flask, request
+from flask import Flask, request, send_file
 from flask.ext.dynamo import Dynamo
 import dynamodb_config
 import time
@@ -46,7 +46,7 @@ def index():
                     'user_id': [user_id],
                     'count': 1
                 })
-    return ""  # Super small response sent to client
+    return send_file('__hello.gif')  # Super small response sent to client
 
 
 if __name__ == '__main__':
