@@ -3,7 +3,6 @@ Simple cloud-based web analytics in Python.
 
 ##### How to test `pwanalytics.js`:
 ```
-cd python-web-analytics
 python -m SimpleHTTPServer 8000
 ```
 Open a web browser and navigate to `localhost:8000/boilerplate-html/index.html`
@@ -24,10 +23,14 @@ Run the DynamoDB local instance:
 java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8080
 ```
 
-To run the `collector server`, run commands as follows:  
+Setup DynamoDB:  
 ```
-cd python-web-analytics/collector
-python collector.py
+python collector/dynamodb_setup.py
+```
+
+To run the `collector` server, run commands as follows:  
+```
+python collector/collector.py
 ```
 This server accepts GET requests at this address: `localhost:5000/collect` and prints
 data received as URL params to the terminal.  

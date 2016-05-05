@@ -7,45 +7,30 @@ Author: Angad Gill
 
 from flask import Flask, request
 from flask.ext.dynamo import Dynamo
-
-from boto.dynamodb2.fields import HashKey
-from boto.dynamodb2.table import Table
-
+import dynamodb_config
 import time
 
 
 app = Flask(__name__)
-app.config['DYNAMO_ENABLE_LOCAL'] = True
-app.config['DYNAMO_LOCAL_HOST'] = 'localhost'
-app.config['DYNAMO_LOCAL_PORT'] = 8000
-
-
-app.config['DYNAMO_TABLES'] = [
-    Table('pages', schema=[HashKey('key')]),
-]
-
-
-dynamo = Dynamo(app)
-
-# with app.app_context():
-#     dynamo.create_all()
-#     for table_name, table in dynamo.tables.iteritems():
-#         print table_name, table
+app.config['DYNAMO_TABLES'] = dynamodb_config.DYNAMO_TABLES
+dynamo = Dynamo(app)  # Assumes that DynamoDB tables are already setup
 
 
 @app.route('/collect', methods=['GET'])
 def index():
-    pagename = request.args.get('pagename')
+    pagename = str(request.args.get('pagename'))
     time_stamp = time.time()
+    # TODO: Replace 99999 below with actual user_id
     user_id = 99999
     key = pagename + '_' + str(user_id) + '_' + str(time_stamp)
-    print pagename
-    dynamo.tables['pages'].put_item(data={
-        'key': key,
-        'pagename': pagename,
-        'time': time_stamp,
-        'user_id': user_id
-    })
+    print key
+    with app.app_context():
+        dynamo.tables['pages'].put_item(data={
+            'key': key,
+            'pagename': pagename,
+            'time': time_stamp,
+            'user_id': user_id
+        })
     return ""  # Super small response sent to client
 
 
