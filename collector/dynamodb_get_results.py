@@ -16,4 +16,8 @@ with app.app_context():
     table = dynamo.tables['pages']
     results = table.scan()
     for result in results:
-        print "Pagename: %s, \t count: %d" % (result['pagename'], result['count'])
+        pagename = result['pagename']
+        count = result['count']
+        unique_users = len(set(result['user_id']))  # Convert to set to count unique
+        print "Pagename: %s, \t count: %d, \t unique users: %d" % \
+              (pagename, count, unique_users)
