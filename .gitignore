@@ -60,3 +60,12 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# PyCharm
+.idea
+
+# Environment variables file
+*.env
+
+# Mac
+.DS_Store
