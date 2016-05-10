@@ -66,7 +66,7 @@ function PyWebAnalytics() {
     return str.join("&");
   }
 
-  this.generate_client_id = function() {
+  this.generate_user_id= function() {
     // rfc4122 v4 compliant uuid 
     // From: http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
     var rfc4122_v4 = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -89,9 +89,9 @@ function PyWebAnalytics() {
   }
 
   this.init_cookie = function() {
-    var client_id = docCookies.getItem(this.cookie_name) || this.generate_client_id();
-    docCookies.setItem(this.cookie_name, client_id, this.cookie_expire);
-    this.set_param('client_id', client_id);
+    var user_id = docCookies.getItem(this.cookie_name) || this.generate_user_id();
+    docCookies.setItem(this.cookie_name, user_id, this.cookie_expire);
+    this.set_param('user_id', user_id);
   }
 
   this.init = function() {

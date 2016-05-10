@@ -20,8 +20,7 @@ dynamo = Dynamo(app)  # Assumes that DynamoDB tables are already setup
 def index():
     pagename = request.args.get('pagename')
     time_stamp = time.time()
-    # TODO: Replace 99999 below with actual user_id
-    user_id = 99999
+    user_id = request.args.get('user_id')
 
     if pagename:  # pagename is not None
         print "Page visit at:", pagename
