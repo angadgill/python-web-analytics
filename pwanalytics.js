@@ -89,10 +89,9 @@ function PyWebAnalytics() {
   }
 
   this.init_cookie = function() {
-    var client_id_value = docCookies.getItem(this.cookie_name);
-    client_id_value
-      ? docCookies.setItem(this.cookie_name, client_id_value, this.cookie_expire)
-      : docCookies.setItem(this.cookie_name, this.generate_client_id(), this.cookie_expire);
+    var client_id = docCookies.getItem(this.cookie_name) || this.generate_client_id();
+    docCookies.setItem(this.cookie_name, client_id, this.cookie_expire);
+    this.set_param('client_id', client_id);
   }
 
   this.init = function() {
