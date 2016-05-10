@@ -52,6 +52,8 @@ function PageviewTracker (name, pagename) {
 function PyWebAnalytics() {
 
   this.data = {};
+  this.cookie_name = '_pwa';
+  this.cookie_expire = 63072000;
 
   // Serialize dictionary data into querystring
   // From: http://stackoverflow.com/questions/1714786/querystring-encoding-of-a-javascript-object
@@ -64,6 +66,18 @@ function PyWebAnalytics() {
     return str.join("&");
   }
 
+  this.generate_client_id = function() {
+    // rfc4122 v4 compliant uuid 
+    // From: http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+    var rfc4122_v4 = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+    });
+    
+    // Append current timestamp
+    return rfc4122_v4 + '.' + new Date().getTime().toString();
+  }
+
   this.send = function() {
     var i = new Image();
     var request_url = "//localhost:5000/collect?" + this.serialize(this.data);
@@ -73,6 +87,19 @@ function PyWebAnalytics() {
   this.set_param = function(param, value) {
     this.data[param] = value; 
   }
+
+  this.init_cookie = function() {
+    var client_id_value = docCookies.getItem(this.cookie_name);
+    client_id_value
+      ? docCookies.setItem(this.cookie_name, client_id_value, this.cookie_expire)
+      : docCookies.setItem(this.cookie_name, this.generate_client_id(), this.cookie_expire);
+  }
+
+  this.init = function() {
+    this.init_cookie();
+  }
+
+  this.init();
 }
 
 var pwa = new PyWebAnalytics();
