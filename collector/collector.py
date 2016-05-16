@@ -16,7 +16,7 @@ app.config['DYNAMO_TABLES'] = dynamodb_config.DYNAMO_TABLES
 dynamo = Dynamo(app)  # Assumes that DynamoDB tables are already setup
 
 
-@app.route('/collect', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
     pagename = request.args.get('pagename')
     time_stamp = time.time()
@@ -45,8 +45,8 @@ def index():
                     'user_id': [user_id],
                     'count': 1
                 })
-    return send_file('__hello.gif')  # Super small response sent to client
+    return send_file('__hello.gif')  # Super small web beacon response
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')

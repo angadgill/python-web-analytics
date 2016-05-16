@@ -32,5 +32,5 @@ To run the `collector` server, run commands as follows:
 ```
 python collector/collector.py
 ```
-This server accepts GET requests at this address: `localhost:5000/collect` and prints
+This server accepts GET requests at this address: `localhost:5000` and prints
 data received as URL params to the terminal.  
