@@ -80,7 +80,7 @@ function PyWebAnalytics() {
 
   this.send = function() {
     var i = new Image();
-    var request_url = "//collector.pywebanalytics.org:5000/?" + this.serialize(this.data);
+    var request_url = "//collector.pywebanalytics.org/?" + this.serialize(this.data);
     i.src = request_url;
   }
 
