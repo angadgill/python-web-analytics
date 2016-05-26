@@ -1,0 +1,19 @@
+# Setup
+title:        Python Web Analytics
+tagline:      Simple cloud-based web analytics in Python
+baseurl:      ""
+paginate:     1
+github:		  https://github.com/angadgill/python-web-analytics
+analytics_js: http://cdn.pywebanalytics.org/pwanalytics.js
+
+# About/contact
+author:
+  name:       Angad Gill
+  url:        
+
+# Gems
+gems:
+  - jekyll-paginate
+
+#Others
+markdown: kramdown
