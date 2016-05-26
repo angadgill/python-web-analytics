@@ -72,3 +72,6 @@ target/
 
 # Custom
 set_environment_variables.sh
+
+# Jekyll
+_site/
